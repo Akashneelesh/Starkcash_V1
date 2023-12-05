@@ -89,12 +89,6 @@ export default function Form() {
 						Deposit
 					</h2>
 
-					<h2
-						onClick={() => handleFormChange(2)}
-						className={`${form === 2 ? "active" : ""}`}
-					>
-						Withdraw
-					</h2>
 				</div>
 				<div className="form-main">
 					{form === 1 ? (
