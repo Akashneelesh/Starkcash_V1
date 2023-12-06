@@ -1,5 +1,8 @@
+"use client";
 //@ts-ignore
 import React, { useState } from "react";
+//@ts-ignore
+import {encrypt} from "../components/middleware/encrypt.js"
 //@ts-ignore
 import {
 	//@ts-ignore
@@ -31,11 +34,12 @@ import {
   //@ts-ignore
 import { hash_message,} from "./middleware/Interaction_script";
 import { CallData } from "starknet";
+//@ts-ignore
 
 const erc20_address =
-	"0x034ae182d6ab7d05d41139a1a09a58f1330ea3422019db88be11c94036ca9af5";
+	"0x0636511044b76a1feb98d6ece83b623113f3cfa5d00e6356163823df58f0e228";
 const core_address =
-	"0x03552872f34714257764f9cede28ec22c10672bd5f1c2f4443c88f3326ca274d";
+	"0x0155d74acd3b12a099344c52ae964c74dcb82d7c931d829e645fd4975db04282";
 
 
 interface DepositProps {
@@ -72,6 +76,8 @@ export default function Deposit({ isConnect, walletHandle , connection}: Deposit
 	};
 
 	const handleDeposit = async () => {
+
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 		// handle deposit;
 		const { address, amount } = userInput;
 
@@ -105,10 +111,11 @@ export default function Deposit({ isConnect, walletHandle , connection}: Deposit
 			});
 		}
 
-		let hash = await hash_message(userInput.address, connection);
-
-
 		
+		//userInput.address
+		console.log(userInput.address)
+		console.log(encrypt(userInput.address))
+		let hash = encrypt(userInput.address)
 		let success = await connection.execute([
 			{
 				contractAddress: erc20_address,
@@ -122,7 +129,7 @@ export default function Deposit({ isConnect, walletHandle , connection}: Deposit
 				contractAddress: core_address,
 				entrypoint: 'deposit',
 				calldata: CallData.compile({
-				amount: cairo.uint256(amount)	,
+				amount: amount	,
 				hash : hash,
 				
 				}),
