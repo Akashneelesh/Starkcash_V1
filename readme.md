@@ -7,6 +7,10 @@ StarkCash is a cutting-edge decentralized application (DApp) built on the StarkN
 
 This project showcases an implementation of the EIP - 7503 (Wormhole). Which enables minting of secretly burnt ethers as a native privacy solution.
 
+## Project Flow
+![image](https://github.com/Akashneelesh/Starkcash_V1/assets/151825680/96c09aa3-735a-4cb0-9db8-bba3d930c96e)
+
+
 ## Key Functions
 1. Encryption Function: It takes in the withdrawer address and encrypts it, which is then passed on to the Deposit function
 2. Deposit Function: It has two components: the amount and encrypted address. Whoch after succefully invoke woruld emit an event with the amount and the encrypted address
