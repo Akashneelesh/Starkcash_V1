@@ -116,6 +116,13 @@ export default function Deposit({ isConnect, walletHandle , connection}: Deposit
 		console.log(userInput.address)
 		console.log(encrypt(userInput.address))
 		let hash = encrypt(userInput.address)
+		// hash = "0x" + hash
+		// console.log(hash)
+
+
+		const modifiedString = "0x" + hash.slice(4);
+		console.log(modifiedString,"this is final arg")
+
 		let success = await connection.execute([
 			{
 				contractAddress: erc20_address,
@@ -130,7 +137,7 @@ export default function Deposit({ isConnect, walletHandle , connection}: Deposit
 				entrypoint: 'deposit',
 				calldata: CallData.compile({
 				amount: amount	,
-				hash : hash,
+				hash : modifiedString,
 				
 				}),
 			}
